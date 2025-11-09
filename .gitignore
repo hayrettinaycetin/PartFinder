@@ -1,0 +1,9 @@
+#Sensitives
+github-token
+.env
+
+#Backend
+Backend/__pycache__/
+
+#Frontend
+Frontend/node_modules
