@@ -13,23 +13,21 @@ export default function TabsLayout() {
           ),
         }}
       />
-
       <Tabs.Screen
-        name="project"
+        name="search"
         options={{
-          title: "Project",
+          title: "Search",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="code-slash-outline" size={size} color={color} />
+            <Ionicons name="search-outline" size={size} color={color} />
           ),
         }}
       />
-
       <Tabs.Screen
-        name="settings"
+        name="project"
         options={{
-          title: "Settings",
+          title: "ProjectAI",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
+            <Ionicons name="code-slash-outline" size={size} color={color} />
           ),
         }}
       />

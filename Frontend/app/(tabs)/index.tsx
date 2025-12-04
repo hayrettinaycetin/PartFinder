@@ -1,104 +1,128 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, FlatList, TouchableOpacity } from "react-native";
-import { useTheme } from "../_layout"; // our theme hook
+import React from "react";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
+import { MotiView, MotiText } from "moti";
 
 export default function HomeScreen() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const [results, setResults] = useState([
-    { id: "1", name: "ESP32 Microcontroller" },
-    { id: "2", name: "STM32F407 Discovery Board" },
-    { id: "3", name: "Raspberry Pi 4 Model B" },
-    { id: "4", name: "LIS3DH Accelerometer" },
-  ]);
-
-  const handleSearch = (text: string) => {
-    setSearchQuery(text);
-  };
-
-  const filteredResults = results.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const router = useRouter();
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDark ? "#000" : "#fff" },
-      ]}
-    >
-      {/* Title */}
-      <Text style={[styles.title, { color: isDark ? "#fff" : "#000" }]}>
-        Component Finder 🔍
-      </Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      
+      {/* Title Animation */}
+      <MotiText
+        from={{ opacity: 0, translateY: -20 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ type: "timing", duration: 600 }}
+        style={styles.title}
+      >
+        Welcome to Component Finder 👋
+      </MotiText>
 
-      {/* Search bar */}
-      <TextInput
-        style={[
-          styles.searchInput,
-          {
-            backgroundColor: isDark ? "#1a1a1a" : "#f2f2f2",
-            color: isDark ? "#fff" : "#000",
-          },
-        ]}
-        placeholder="Search for components..."
-        placeholderTextColor={isDark ? "#888" : "#666"}
-        value={searchQuery}
-        onChangeText={handleSearch}
-      />
+      {/* Subtitle Animation */}
+      <MotiText
+        from={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 300, duration: 600 }}
+        style={styles.subtitle}
+      >
+        Find the components you need for your project  from different sources.
+      </MotiText>
 
-      {/* Results list */}
-      <FlatList
-        data={filteredResults}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[
-              styles.card,
-              {
-                backgroundColor: isDark ? "#111" : "#fafafa",
-                borderColor: isDark ? "#333" : "#ddd",
-              },
-            ]}
-          >
-            <Text style={{ color: isDark ? "#fff" : "#000", fontWeight: "600" }}>
-              {item.name}
-            </Text>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={
-          <Text style={{ color: isDark ? "#888" : "#999", marginTop: 20 }}>
-            No components found.
-          </Text>
-        }
-        style={{ width: "100%" }}
-      />
-    </View>
+      {/* How It Works Card */}
+      <MotiView
+        from={{ opacity: 0, translateY: 30 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ delay: 500, duration: 600 }}
+        style={styles.section}
+      >
+        <Text style={styles.sectionTitle}>How does search tab works ?</Text>
+        <Text style={styles.step}>1. Describe your component as you do in a marketplace search.</Text>
+        <Text style={styles.step}>2. 3 different sources will be scanned.</Text>
+        <Text style={styles.step}>3. View names, prices and links.</Text>
+        <Text style={styles.step}>4. From Digikey check price for specific quantity.</Text>
+      </MotiView>
+
+      {/* ProjectAI Card */}
+      <MotiView
+        from={{ opacity: 0, translateY: 30 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ delay: 500, duration: 600 }}
+        style={styles.section}
+      >
+        <Text style={styles.sectionTitle}>How does ProjectAI tab works ?</Text>
+        <Text style={styles.step}>1. Think about a cool project you want to build.</Text>
+        <Text style={styles.step}>2. Explain it to our AI with details.</Text>
+        <Text style={styles.step}>3.Enjoy!</Text>
+      </MotiView>
+
+      {/* Animated Button */}
+      <MotiView
+        from={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1000, type: "spring" }}
+      >
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/search")}
+        >
+          <Text style={styles.buttonText}>Start Searching</Text>
+        </TouchableOpacity>
+      </MotiView>
+
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    padding: 25,
+    paddingTop: 50,
   },
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 28,
+    fontWeight: "800",
     marginBottom: 15,
     textAlign: "center",
   },
-  searchInput: {
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 15,
+  subtitle: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "#555",
+    marginBottom: 30,
   },
-  card: {
+  section: {
+    marginBottom: 30,
+    backgroundColor: "#f5f5f5",
+    padding: 15,
+    borderRadius: 12,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    marginBottom: 10,
+  },
+  step: {
+    fontSize: 15,
+    color: "#444",
+    marginBottom: 6,
+  },
+  example: {
+    fontSize: 15,
+    color: "#444",
+    marginBottom: 6,
+    fontStyle: "italic",
+  },
+  button: {
+    backgroundColor: "#007bff",
     padding: 15,
     borderRadius: 10,
-    marginBottom: 10,
-    borderWidth: 1,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "600",
+    textAlign: "center",
   },
 });

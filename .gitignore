@@ -4,6 +4,7 @@ github-token
 
 #Backend
 Backend/__pycache__/
+Backend/.venv/
 
 #Frontend
 Frontend/node_modules
