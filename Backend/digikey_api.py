@@ -96,5 +96,5 @@ token = get_access_token()
 
 if __name__ == "__main__":
     print(search_from_digikey("STM32L4")) #Test
-    #print(check_the_price("497-18230-ND", 10)) #Test
+    print(check_the_price("497-18230-ND", 10)) #Test
 

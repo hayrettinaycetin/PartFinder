@@ -15,7 +15,7 @@ def search_from_farnell(keyword:str):
         "storeInfo.id":"uk.farnell.com",
         "callInfo.apiKey": farnell_api_key,
         "resultsSettings.offset":"0",
-        "resultsSettings.numberOfResults":"20",
+        "resultsSettings.numberOfResults":"1",
         "resultsSettings.refinements.filters":"inStock",
         "resultsSettings.responseGroup":"large"
     }
@@ -67,5 +67,5 @@ def extract_product_info(data):
     return results
 
 if __name__ == "__main__":
-    print(extract_product_info(search_from_farnell("STM32L4")))    
-    #print((search_from_farnell("STM32L4")))
+    print(extract_product_info(search_from_farnell("STM32L4")))   #Test
+    print((search_from_farnell("STM32L4"))) #Test
